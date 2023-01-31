@@ -20,7 +20,12 @@ const router = createRouter({
     {
       path: '/kuitansi',
       name: 'kuitansi',
-      component: ()=> import('../views/KuitansiView.vue')
+      component: ()=> import('../views/Kuitansi/ListView.vue')
+    },
+    {
+      path:'/kuitansi/form',
+      name:'kuitansiform',
+      component:()=> import('../views/Kuitansi/FormView.vue')
     }
   ]
 })

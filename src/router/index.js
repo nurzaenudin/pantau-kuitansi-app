@@ -18,14 +18,14 @@ const router = createRouter({
       component: () => import('../views/AboutView.vue')
     },
     {
-      path: '/kuitansi',
-      name: 'kuitansi',
-      component: ()=> import('../views/Kuitansi/ListView.vue')
+      path: '/perintahbayar',
+      name: 'perintahbayar',
+      component: ()=> import('../views/PerintahBayar/ListView.vue')
     },
     {
-      path:'/kuitansi/form',
-      name:'kuitansiform',
-      component:()=> import('../views/Kuitansi/FormView.vue')
+      path:'/perintahbayar/form',
+      name:'perintahbayarform',
+      component:()=> import('../views/PerintahBayar/FormView.vue')
     }
   ]
 })

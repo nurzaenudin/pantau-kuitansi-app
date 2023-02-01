@@ -1,8 +1,9 @@
 <script setup>
 import{ref, onMounted} from 'vue'
+import PerintahBayarAPI from '../../API/PerintahBayar.js'
 
 //reactive state
-const kuitansis=ref([
+const perintahbayars=ref([
   {
     judul1: 'isi 77711',
     judul2: 'isi 77721',
@@ -14,12 +15,24 @@ const kuitansis=ref([
     judul3: 'isi 77732'
   }
   ])
+
+const spbys=ref({});
+const getSpbys=async()=>{
+  spbys.value=await PerintahBayarAPI.index();
+
+};
+
+console.log('ini udin ya');
+getSpbys();
+
+
+
 </script>
 
 <template>
-    <div class="kuitansi">
-      <h1>Ini adalah kuitansi</h1>
-      <RouterLink to="/kuitansi/form">Kuitansi</RouterLink>
+    <div class="perintahbayar">
+      <h1>Ini adalah perintah bayar</h1>
+      <RouterLink to="/perintahbayar/form">Tambah Perintah Bayar</RouterLink>
       <!-- <button router to="/kuitansi/form">
       Tambah Kuitansi
     </button> -->
@@ -32,10 +45,10 @@ const kuitansis=ref([
             <th>Aksi</th>
         </tr>
         
-<tr v-for="kuitansi in kuitansis">
-    <td> {{kuitansi.judul1}}</td>
-    <td> {{kuitansi.judul2}}</td>
-    <td> {{kuitansi.judul3}}</td>
+<tr v-for="perintahbayar in perintahbayars">
+    <td> {{perintahbayar.judul1}}</td>
+    <td> {{perintahbayar.judul2}}</td>
+    <td> {{perintahbayar.judul3}}</td>
     <td> Edit Hapus</td>
 </tr>
 <tr>
@@ -46,6 +59,10 @@ const kuitansis=ref([
 </tr>
       </table>
     </div>
+
+    SPBYS: {{spbys.content}}
+
+  
   </template>
   
   <style>

@@ -3,27 +3,16 @@ import{ref, onMounted} from 'vue'
 import PerintahBayarAPI from '../../API/PerintahBayar.js'
 
 //reactive state
-const perintahbayars=ref([
-  {
-    judul1: 'isi 77711',
-    judul2: 'isi 77721',
-    judul3: 'isi 77731'
-  },
-  {
-    judul1: 'isi 77712',
-    judul2: 'isi 77722',
-    judul3: 'isi 77732'
-  }
-  ])
+//const perintahbayars=ref([]);
 
-const spbys=ref({});
-const getSpbys=async()=>{
-  spbys.value=await PerintahBayarAPI.index();
+const perintahbayars=ref({});
+const getPerintahBayars=async()=>{
+  perintahbayars.value=await PerintahBayarAPI.index();
 
 };
 
 console.log('ini udin ya');
-getSpbys();
+getPerintahBayars();
 
 
 
@@ -39,17 +28,21 @@ getSpbys();
     <RouterView></RouterView>
       <table border="1">
         <tr>
-            <th>judul 1</th>
-            <th>judul 2</th>
-            <th>judul 3</th>
+            <th>Harga Satuan</th>
+            <th>Keterangan</th>
+            <th>Nama PIC</th>
+            <th>Nama Rekanan</th>
+            <th>Status</th>
             <th>Aksi</th>
         </tr>
         
-<tr v-for="perintahbayar in perintahbayars">
-    <td> {{perintahbayar.judul1}}</td>
-    <td> {{perintahbayar.judul2}}</td>
-    <td> {{perintahbayar.judul3}}</td>
-    <td> Edit Hapus</td>
+<tr v-for="perintahbayar in perintahbayars.content">
+    <td> {{perintahbayar.hargaSatuan}}</td>
+    <td> {{perintahbayar.keterangan}}</td>
+    <td> {{perintahbayar.namaPic}}</td>
+    <td> {{perintahbayar.namaRekanan}}</td>
+    <td> {{perintahbayar.status}}</td>
+    <td> Edit <RouterLink to="/perintahbayar/form">Hapus {{PerintahBayarAPI}}</RouterLink> {{perintahbayar.id}}</td>
 </tr>
 <tr>
     <td> isi 1</td>
@@ -60,7 +53,7 @@ getSpbys();
       </table>
     </div>
 
-    SPBYS: {{spbys.content}}
+    SPBYS: {{perintahbayars}}
 
   
   </template>

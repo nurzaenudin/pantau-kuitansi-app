@@ -13,5 +13,7 @@ export default{
             }
         });
     },
-
+    delete(id){
+        return fetch (APISetting.baseURL + 'perintahbayar/' + id)
+    }
 }

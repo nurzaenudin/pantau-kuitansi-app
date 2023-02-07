@@ -1,5 +1,5 @@
 <script setup>
-import{ref, onMounted} from 'vue'
+import{ref, onMounted, reactive} from 'vue'
 import PerintahBayarAPI from '../../API/PerintahBayar.js'
 
 //reactive state
@@ -7,10 +7,24 @@ import PerintahBayarAPI from '../../API/PerintahBayar.js'
 
 
 const perintahbayarsDTO=ref({});
-const perintahbayars=ref({});
+//const perintahbayars=ref({});
 const getPerintahBayarsDTO=async()=>{
   perintahbayarsDTO.value=await PerintahBayarAPI.getAll();
 };
+//const perintahbayars=ref();
+//const getPerintahBayars=async()=>{
+//  getPerintahBayarsDTO();
+//  perintahbayars.value=await perintahbayarsDTO.content;
+//}
+const perintahbayarsTemp=ref();
+const perintahbayars=ref();
+function getPerintahBayars(){
+  perintahbayarsTemp.value=PerintahBayarAPI.getAll();
+  perintahbayars.value=perintahbayarsTemp.content;
+  console.log(perintahbayars)
+
+}
+  
 
 function tesKlik(){
   console.log('ini tes klik');
@@ -21,21 +35,13 @@ function hapusPerintahBayar(id){
   console.log("ini dari hapus" + perintahbayarsDTO);
 }
 
-function getPerintahBayars(){
-  getPerintahBayarsDTO();
-  
-  perintahbayars.value=perintahbayarsDTO['content'];
-  console.log('dari dalam')
+ 
 
-  
-
-}
-  
-
+getPerintahBayarsDTO();
 getPerintahBayars();
-console.log('value doang ');
-console.log(perintahbayars.value);
-console.log('====');
+
+
+
 
 
 

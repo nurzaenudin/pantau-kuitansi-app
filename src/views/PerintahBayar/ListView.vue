@@ -2,28 +2,11 @@
 import{ref, onMounted, reactive} from 'vue'
 import PerintahBayarAPI from '../../API/PerintahBayar.js'
 
-//reactive state
-//const perintahbayars=ref([]);
-
-
 const perintahbayarsDTO=ref({});
-//const perintahbayars=ref({});
 const getPerintahBayarsDTO=async()=>{
   perintahbayarsDTO.value=await PerintahBayarAPI.getAll();
 };
-//const perintahbayars=ref();
-//const getPerintahBayars=async()=>{
-//  getPerintahBayarsDTO();
-//  perintahbayars.value=await perintahbayarsDTO.content;
-//}
-const perintahbayarsTemp=ref();
-const perintahbayars=ref();
-function getPerintahBayars(){
-  perintahbayarsTemp.value=PerintahBayarAPI.getAll();
-  perintahbayars.value=perintahbayarsTemp.content;
-  console.log(perintahbayars)
 
-}
   
 
 function tesKlik(){
@@ -38,7 +21,7 @@ function hapusPerintahBayar(id){
  
 
 getPerintahBayarsDTO();
-getPerintahBayars();
+
 
 
 
@@ -80,7 +63,6 @@ getPerintahBayars();
     </div>
 
     Perintah Bayar DTO : {{perintahbayarsDTO}}
-    Perintah Bayar : {{ perintahbayars }}
     <button @click="tesKlik">Tes Klik</button>
 
   

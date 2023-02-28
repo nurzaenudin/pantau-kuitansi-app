@@ -2,7 +2,8 @@
 import{ref, onMounted, reactive} from 'vue'
 import PerintahBayarAPI from '../../API/PerintahBayar.js'
 
-const perintahbayarsDTO=ref({});
+const perintahbayarsDTO=ref([]);
+const perintahbayar=ref([]);
 const getPerintahBayarsDTO=async()=>{
   perintahbayarsDTO.value=await PerintahBayarAPI.getAll();
 };
@@ -13,14 +14,20 @@ function tesKlik(){
   console.log('ini tes klik');
 }
 
-function hapusPerintahBayar(id){
+function hapusPerintahBayar(id, index){
   PerintahBayarAPI.delete(id);
-  console.log("ini dari hapus" + perintahbayarsDTO);
+  console.log("ini dari hapus " + perintahbayarsDTO);
+  perintahbayar.splice(index,1);
+
 }
 
  
+onMounted(()=>{
+  console.log('ini habis mounted');
+  getPerintahBayarsDTO();
 
-getPerintahBayarsDTO();
+})
+
 
 
 
@@ -34,7 +41,7 @@ getPerintahBayarsDTO();
 </script>
 
 <template>
-    <div class="perintahbayar">
+    <div class="perintahbayardiv">
       <h1>Ini adalah perintah bayar</h1>
       <RouterLink to="/perintahbayar/form">Tambah Perintah Bayar</RouterLink>
       <!-- <button router to="/kuitansi/form">
@@ -51,19 +58,16 @@ getPerintahBayarsDTO();
             <th>Aksi</th>
         </tr>
         
-<tr v-for="perintahbayar in perintahbayarsDTO.content" v-bind:key="perintahbayar.id">
+<tr v-for="(perintahbayar,index) in perintahbayarsDTO.content" v-bind:key="perintahbayar.id">
     <td> {{perintahbayar.hargaSatuan}}</td>
     <td> {{perintahbayar.keterangan}}</td>
     <td> {{perintahbayar.namaPic}}</td>
     <td> {{perintahbayar.namaRekanan}}</td>
     <td> {{perintahbayar.status}}</td>
-    <td> Edit <button @click="hapusPerintahBayar(perintahbayar.id)">Hapus</button></td>
+    <td> Edit <button @click="hapusPerintahBayar(perintahbayar.id, index)">Hapus</button></td>
 </tr>
       </table>
     </div>
-
-    Perintah Bayar DTO : {{perintahbayarsDTO}}
-    <button @click="tesKlik">Tes Klik</button>
 
   
   </template>

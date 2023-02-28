@@ -3,7 +3,6 @@ import{ref, onMounted, reactive} from 'vue'
 import PerintahBayarAPI from '../../API/PerintahBayar.js'
 
 const perintahbayarsDTO=ref([]);
-const perintahbayar=ref([]);
 const getPerintahBayarsDTO=async()=>{
   perintahbayarsDTO.value=await PerintahBayarAPI.getAll();
 };
@@ -14,11 +13,10 @@ function tesKlik(){
   console.log('ini tes klik');
 }
 
-function hapusPerintahBayar(id, index){
+function hapusPerintahBayar(id,index){
   PerintahBayarAPI.delete(id);
   console.log("ini dari hapus " + perintahbayarsDTO);
-  perintahbayar.splice(index,1);
-
+  this.$delete(this.perintahbayarsDTO.content,index)
 }
 
  

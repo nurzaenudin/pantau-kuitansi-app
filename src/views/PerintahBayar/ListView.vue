@@ -2,9 +2,18 @@
 import{ref, onMounted, reactive} from 'vue'
 import PerintahBayarAPI from '../../API/PerintahBayar.js'
 
-const perintahbayarsDTO=ref([]);
-const getPerintahBayarsDTO=async()=>{
-  perintahbayarsDTO.value=await PerintahBayarAPI.getAll();
+var perintahbayarsDTO=ref([]);
+var perintahbayars=ref([]);
+/* var getPerintahBayarsDTO=async()=>{
+  perintahbayarsDTO.value=await PerintahBayarAPI.getAll()
+}; */
+var getPerintahBayars=async()=>{
+  perintahbayarsDTO.value=await PerintahBayarAPI.getAll()
+  .then(perintahbayars=perintahbayarsDTO)
+  .then(console.log('ini dari then '+ perintahbayars));
+
+  
+
 };
 
   
@@ -19,10 +28,18 @@ function hapusPerintahBayar(id,index){
   this.$delete(this.perintahbayarsDTO.content,index)
 }
 
+/* function getPerintahBayars(){
+  var perintahbayars= Promise.all(getPerintahBayarsDTO())  ;
+  console.log('ini perintah bayar '+ perintahbayarsDTO);
+  console.log(perintahbayarsDTO.value);
+
+} */
  
 onMounted(()=>{
   console.log('ini habis mounted');
-  getPerintahBayarsDTO();
+  getPerintahBayars();
+  console.log('ini habis mounted');
+  console.log(perintahbayarsDTO)
 
 })
 
